@@ -23,5 +23,8 @@
 	},
 	"scripts": {
 		"dev": "bun run --watch src/index.ts"
+	},
+	"devDependencies": {
+		"@types/bun": "^1.1.17"
 	}
 }
