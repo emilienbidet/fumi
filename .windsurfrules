@@ -1,0 +1,22 @@
+# Fumi PDF Server Framework
+
+## Project Overview
+
+Fumi is a Bun-powered PDF generation server framework using React for templating. 
+It provides a simple, type-safe way to create PDF server with React components.
+
+## Code Style Guidelines
+
+### General Principles
+
+1. Follow SOLID principles strictly:
+   - Single Responsibility: Each class/module handles one specific concern
+   - Open/Closed: Extend functionality through plugins/middlewares
+   - Liskov Substitution: Router implementations must be interchangeable
+   - Interface Segregation: Keep interfaces focused and minimal
+   - Dependency Inversion: Depend on abstractions, not implementations
+
+2. TypeScript Usage:
+   - Use strict type checking
+   - Document all public interfaces with TSDoc comments
+   - Define and export types for all public APIs
