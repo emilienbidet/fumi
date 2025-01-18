@@ -1,0 +1,7 @@
+{
+  "name": "fumi-monorepo",
+  "private": true,
+  "peerDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
