@@ -25,6 +25,7 @@
 		"dev": "bun run --watch src/index.ts"
 	},
 	"devDependencies": {
+		"@fumi/typescript-config": "workspace:*",
 		"@types/bun": "^1.1.17"
 	}
 }
