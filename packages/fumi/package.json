@@ -25,10 +25,14 @@
 		"dev": "bun run --watch src/index.ts"
 	},
 	"dependencies": {
-		"@sinclair/typebox": "^0.34.14"
+		"@sinclair/typebox": "^0.34.14",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
 	},
 	"devDependencies": {
 		"@fumi/typescript-config": "workspace:*",
-		"@types/bun": "^1.1.17"
+		"@types/bun": "^1.1.17",
+		"@types/react": "^19.0.7",
+		"@types/react-dom": "^19.0.3"
 	}
 }
