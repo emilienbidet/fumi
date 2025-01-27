@@ -1,5 +1,7 @@
 pre-commit:
   commands:
+    test:
+      run: bun test
     check:
       run: bunx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
       stage_fixed: true
