@@ -1,7 +1,7 @@
 {
 	"name": "fumi",
 	"version": "0.0.1",
-	"description": "Bun-powered PDF generation server framework built with React and TypeBox.",
+	"description": "Bun-powered PDF generation server framework built with React and any validation library.",
 	"keywords": [
 		"pdf",
 		"react",
@@ -25,7 +25,6 @@
 		"dev": "bun run --watch src/index.ts"
 	},
 	"dependencies": {
-		"@sinclair/typebox": "^0.34.14",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0"
 	},
