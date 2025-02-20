@@ -7,7 +7,7 @@
 		"check": "biome check --write",
 		"test": "bun test"
 	},
-	"packageManager": "bun@1.1.43",
+	"packageManager": "bun@1.2.2",
 	"workspaces": ["packages/*"],
 	"peerDependencies": {
 		"typescript": "^5.7.3"
