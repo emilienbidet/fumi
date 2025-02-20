@@ -22,7 +22,7 @@
       },
       "devDependencies": {
         "@fumi/typescript-config": "workspace:*",
-        "@types/bun": "^1.1.17",
+        "@types/bun": "^1.2.2",
         "@types/react": "^19.0.7",
         "@types/react-dom": "^19.0.3",
       },
