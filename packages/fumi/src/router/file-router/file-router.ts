@@ -27,13 +27,7 @@ export class FileRouter implements Router {
 			const path = `/${file.replace("/document.tsx", "")}`;
 
 			const module = await import(`${this.options.routesDirectory}/${file}`);
-			const {
-				schema,
-				options: pdfOptions = {},
-				default: Document,
-				Header,
-				Footer,
-			} = module;
+			const { schema, options, default: Document, Header, Footer } = module;
 
 			if (!Document) {
 				throw new Error(`Document component not found in ${file}`);
@@ -57,10 +51,10 @@ export class FileRouter implements Router {
 			this.add({
 				path,
 				schema,
+				options,
 				Document,
 				Header,
 				Footer,
-				pdfOptions,
 			});
 		}
 	}

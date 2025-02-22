@@ -1,7 +1,8 @@
-import { type ComponentProps, Schema } from "@/schema/schema";
+import type { ComponentProps } from "@/components";
+import { z } from "zod";
 
-export const schema = Schema.Object({
-	title: Schema.String(),
+export const schema = z.object({
+	title: z.string(),
 });
 
 export default function Document({ title }: ComponentProps<typeof schema>) {

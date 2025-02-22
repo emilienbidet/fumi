@@ -1,11 +1,10 @@
-import type { Options } from "@/router/file-router/file-router-route-options";
+import type { RouteOptions } from "@/router/file-router/route-options";
 
-export const options: Options = {
-	methods: ["GET", "POST"],
+export const options: RouteOptions = {
 	format: "A4",
 	orientation: "portrait",
 	margin: { top: 20, right: 20, bottom: 20, left: 20 },
-	timeout: 1000,
+	timeout: 3000,
 };
 
 export default function Document() {

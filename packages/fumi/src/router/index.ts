@@ -1,55 +1,61 @@
-import type { RouteOptions } from "@/router/route-options";
-import type { ComponentProps, TCompiledSchema, TSchema } from "@/schema/schema";
+import type { ComponentProps } from "@/components";
+import type { PDFOptions } from "@/pdf";
+import type { HTTPMethod } from "@/router/http-method";
+import type { Schema } from "@/schema";
 import type { ComponentType } from "react";
 
 /**
  * Represents a complete PDF route configuration in the Fumi framework.
  * Provides type-safe definition of routes with their associated React components and validation schemas.
  *
- * @template T - The TypeBox schema type that defines the expected props structure
+ * Routes define the path, allowed methods, and the component used to render the PDF.
+ *
+ * @template T - The schema type that defines the expected props structure
  * @example
  * ```typescript
  * const diplomaRoute: Route<typeof diplomaSchema> = {
  *   path: 'diploma',
  *   schema: diplomaSchema,
  *   Document: DiplomaComponent,
- *   options: { methods: ['GET'] }
  * };
  * ```
  */
-export interface Route<T extends TSchema> {
+export interface Route<T extends Schema> {
 	/**
 	 * The URL path where the PDF will be served.
 	 *
 	 * This is the final segment of the URL (e.g., 'diploma', 'menu', 'invoice').
 	 *
 	 * Should be unique within the router configuration.
+	 *
+	 * @example
+	 * ```typescript
+	 * const routePath = 'diploma';
+	 * ```
 	 */
 	path: string;
 
 	/**
-	 * The TypeBox schema that defines the expected request body structure.
+	 * The schema that defines the expected request body structure
 	 *
 	 * When provided, this schema's properties will be passed as props to the Component
 	 * and used for runtime validation of incoming requests.
 	 *
 	 * If not provided, the route will accept no props.
-	 */
-	schema: T;
-
-	/**
-	 * The compiled version of the schema, if it exists.
 	 *
-	 * This is used for runtime validation of incoming requests.
+	 * @example
+	 * ```typescript
+	 * const routeSchema = diplomaSchema;
+	 * ```
 	 */
-	compiledSchema: TCompiledSchema<T>;
+	schema?: T;
 
 	/**
 	 * Configuration settings for the route.
 	 *
-	 * Includes PDF generation options and allowed HTTP methods.
+	 * Includes PDF generation options.
 	 */
-	options: RouteOptions;
+	options?: PDFOptions;
 
 	/**
 	 * Optional array of example props for the route.
