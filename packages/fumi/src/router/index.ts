@@ -1,6 +1,5 @@
 import type { ComponentProps } from "@/components";
 import type { PDFOptions } from "@/pdf";
-import type { HTTPMethod } from "@/router/http-method";
 import type { Schema } from "@/schema";
 import type { ComponentType } from "react";
 
