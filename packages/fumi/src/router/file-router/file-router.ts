@@ -1,8 +1,7 @@
+import type { Route } from "@/router";
 import type { FileRouterOptions } from "@/router/file-router/file-router-options";
-import type { HTTPMethod } from "@/router/http-method";
-import type { Route } from "@/router/route";
 import type { Router } from "@/router/router";
-import { Schema, SchemaCompiler, type TSchema } from "@/schema/schema";
+import type { Schema } from "@/schema";
 import { Glob } from "bun";
 
 /**
@@ -10,7 +9,7 @@ import { Glob } from "bun";
  * Each route should be in its own directory with a document.tsx file
  */
 export class FileRouter implements Router {
-	private routes: Map<string, Route<TSchema>> = new Map();
+	private routes: Map<string, Route<Schema>> = new Map();
 
 	constructor(
 		private options: FileRouterOptions = { routesDirectory: "./routes" },
@@ -25,12 +24,12 @@ export class FileRouter implements Router {
 		const scan = glob.scan(this.options.routesDirectory);
 
 		for await (const file of scan) {
-			const routePath = `/${file.replace("/document.tsx", "")}`;
+			const path = `/${file.replace("/document.tsx", "")}`;
 
 			const module = await import(`${this.options.routesDirectory}/${file}`);
 			const {
-				schema = Schema.Object({}),
-				options: { methods, ...options } = {},
+				schema,
+				options: pdfOptions = {},
 				default: Document,
 				Header,
 				Footer,
@@ -56,16 +55,12 @@ export class FileRouter implements Router {
 			// TODO: Add examples and check examples are valid
 
 			this.add({
-				path: routePath,
+				path,
 				schema,
-				compiledSchema: SchemaCompiler.Compile(schema),
 				Document,
 				Header,
 				Footer,
-				options: {
-					methods: new Set(methods || ["GET"]),
-					...options,
-				},
+				pdfOptions,
 			});
 		}
 	}
@@ -75,7 +70,7 @@ export class FileRouter implements Router {
 	 * @template T The schema type for route props validation
 	 * @param route The route configuration to add
 	 */
-	public add<T extends TSchema>(route: Route<T>): void {
+	public add<T extends Schema>(route: Route<T>): void {
 		if (this.routes.has(route.path)) {
 			throw new Error(`Route with path "${route.path}" already exists`);
 		}
@@ -84,19 +79,13 @@ export class FileRouter implements Router {
 
 	/**
 	 * Matches a request against registered routes
-	 * @param method The HTTP method of the request
 	 * @param path The URL path of the request
 	 * @returns The matched route or null if no match found
 	 */
-	public match(method: HTTPMethod, path: string): Route<TSchema> | null {
+	public match(path: string): Route<Schema> | null {
 		const route = this.routes.get(path);
 
-		if (!route) {
-			return null;
-		}
-		if (!route.options.methods.has(method)) {
-			return null;
-		}
+		if (!route) return null;
 
 		return route;
 	}
